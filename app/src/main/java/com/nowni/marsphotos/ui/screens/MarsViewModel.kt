@@ -34,6 +34,7 @@ class MarsViewModel(private val marsPhotosRepository:MarsPhotosRepository) : Vie
 
     fun getMarPhotos() {
         viewModelScope.launch {
+            marsUiState = MarsUiState.Loading
             marsUiState = try {
                 val listResult = marsPhotosRepository.getMarsPhotos()
                 MarsUiState.Success(

@@ -161,7 +161,7 @@ fun LoadingScreenPreview() {
 fun ErrorScreenPreview() {
     MarsPhotosTheme {
         Surface {
-            ErrorScreen(retryAction = {})
+            ErrorScreen(retryAction = {}, modifier = Modifier.fillMaxSize())
 
         }
     }
