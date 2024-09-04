@@ -13,10 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import com.nowni.marsphotos.R
-import com.nowni.marsphotos.ui.screens.MarsViewModel
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.nowni.marsphotos.R
 import com.nowni.marsphotos.ui.screens.HomeScreen
+import com.nowni.marsphotos.ui.screens.MarsViewModel
+import com.nowni.marsphotos.ui.theme.MarsPhotosTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,9 +31,11 @@ fun MarsPhotosApp() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            val marsViewModel: MarsViewModel = viewModel(factory = MarsViewModel.Factory)
+            val marsViewModel: MarsViewModel =
+                viewModel(factory = MarsViewModel.Factory)
             HomeScreen(
                 marsUiState = marsViewModel.marsUiState,
+                retryAction = marsViewModel::getMarPhotos,
                 contentPadding = it
             )
         }
@@ -42,7 +46,7 @@ fun MarsPhotosApp() {
 @Composable
 fun MarsTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
         scrollBehavior = scrollBehavior,
@@ -55,4 +59,18 @@ fun MarsTopAppBar(
         modifier = modifier
     )
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true)
+@Composable
+fun MarsPhotosAppBarPreview() {
+    MarsPhotosTheme {
+        val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+        Surface {
+            MarsTopAppBar(scrollBehavior = scrollBehavior)
+
+        }
+    }
+}
+
 

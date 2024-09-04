@@ -3,7 +3,6 @@ package com.nowni.marsphotos.fake
 import com.nowni.marsphotos.rules.TestDispatcherRule
 import com.nowni.marsphotos.ui.screens.MarsUiState
 import com.nowni.marsphotos.ui.screens.MarsViewModel
-import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -22,12 +21,10 @@ class MarsViewModelTest {
             )
             assertEquals(
                 MarsUiState.Success(
-                    "Success: ${FakeDataSource.photosList.size} Mars photos retrieved"
+                    FakeDataSource.photosList
                 ),
                 marsViewModel.marsUiState
             )
         }
     }
-
-
 }
